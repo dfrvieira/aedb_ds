@@ -2,6 +2,7 @@ from tad_list import List
 from exceptions import * 
 from nodes import SingleListNode, DoubleListNode
 from sll_interator
+
 class SinglyLinkedList(List):
     def __init__(self):
         self.head = None
@@ -70,15 +71,23 @@ class SinglyLinkedList(List):
     # Inserts the specified element at the first position in the list.
     
     def insert_first(self, element):
-        self.head = SingleListNode(element, self.head)
-        self.size+=1
+        if self.size()==0:
+            self.head = SingleListNode(element, None)
+            self.tail=self.head
+        else:
+            self.head = SingleListNode(element, self.head)
+        self.count+=1
 
     # Inserts the specified element at the last position in the list.
     
     def insert_last(self, element):
-        self.tail.set_next(SingleListNode(element, None))
-        self.tail = self.tail.get_next()
-        self.size += 1
+        if self.size()==0:
+            self.tail=SingleListNode(element, None)
+            self.head = self.tail
+        else:
+            self.tail.set_next(SingleListNode(element, None))
+            self.tail = self.tail.get_next()
+        self.count += 1
 
     # Inserts the specified element at the specified position in the list.
     # Range of valid positions: 0, ..., size().
