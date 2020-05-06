@@ -2,6 +2,7 @@ from tad_list import List
 from exceptions import * 
 from nodes import SingleListNode, DoubleListNode
 import sll_iterator
+
 class SinglyLinkedList(List):
     def __init__(self):
         self.head = None
