@@ -1,11 +1,13 @@
 from tad_list import List
-from exceptions import * 
+from exceptions import *
 from nodes import SingleListNode
 import sll_iterator
+
 class SinglyLinkedList(List):
     def __init__(self):
         self.head = None
         self.tail = None
+        self.interated_node = None
         self.count = 0
     # Returns true iff the list contains no elements.
     def is_empty(self):
@@ -173,7 +175,7 @@ class SinglyLinkedList(List):
     def iterator(self, reset = False):
         if self.iterated_node == None:
             self.iterated_node = self.head
-        it=sll_iterator.Iterator(self.iterated_node, self.head)
+        it = sll_iterator.Iterator(self.iterated_node, self.head)
         if reset == False:
             self.iterated_node=self.iterated_node.get_next()
         else:

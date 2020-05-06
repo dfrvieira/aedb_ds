@@ -17,7 +17,7 @@ class SingleListNode:
 
 class DoubleListNode(SingleListNode):
     def __init__(self, element, next_node, previous):
-        SingleListNode.__init__(element, next_node)
+        SingleListNode.__init__(self, element, next_node)
         self.previous = previous
     
     def get_previous(self):

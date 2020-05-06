@@ -1,8 +1,7 @@
 import exceptions
-import tad_iterator
 
-class sll_Iterator(tad_iterator.Iterator):
-    def __init__(self, target):
+class sll_Iterator():
+    def __init__(self, target, first):
         self.target = target
         self.first = target
 
