@@ -1,8 +1,7 @@
 from tad_list import List
 from exceptions import * 
-from nodes import SingleListNode, DoubleListNode
+from nodes import SingleListNode
 import sll_iterator
-
 class SinglyLinkedList(List):
     def __init__(self):
         self.head = None
@@ -103,7 +102,7 @@ class SinglyLinkedList(List):
             if -1 < position <=self.size():
                 if position==0:
                     self.insert_first(element)
-                elif position == self.size():
+                elif position == self.size()-1:
                     self.insert_last(element)
                 else:
                     current_node=self.head
@@ -132,7 +131,7 @@ class SinglyLinkedList(List):
     def remove_last(self):
         try:
             current = self.head
-            for _ in range(0,self.size()-1):
+            for _ in range(0,self.size()-2):
                 current = current.get_next()
             current.set_next(None)
             self.tail = current

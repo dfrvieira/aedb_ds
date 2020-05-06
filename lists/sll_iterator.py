@@ -1,7 +1,7 @@
 import exceptions
 import tad_iterator
 
-class Sll_Iterator(tad_iterator.Iterator):
+class sll_Iterator(tad_iterator.Iterator):
     def __init__(self, target):
         self.target = target
         self.first = target
@@ -12,7 +12,7 @@ class Sll_Iterator(tad_iterator.Iterator):
         return False
 
     def next(self):
-        if self.has_next():#else:
+        if self.has_next():
             elem = self.target.get_element()
             self.target = self.target.get_next()
             return elem
