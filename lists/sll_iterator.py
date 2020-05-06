@@ -3,7 +3,7 @@ import exceptions
 class sll_Iterator():
     def __init__(self, target, first):
         self.target = target
-        self.first = target
+        self.first = first
 
     def has_next(self):
         if self.target != None:

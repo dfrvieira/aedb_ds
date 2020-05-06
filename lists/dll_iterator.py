@@ -7,7 +7,7 @@ class TwoWayIterator(Iterator):
         self.last = last
 
     def has_previous(self):
-        if self.target.get_previous() != None:
+        if self.target != None:
             return True
         return False
 
