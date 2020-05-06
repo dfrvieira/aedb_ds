@@ -170,7 +170,12 @@ class SinglyLinkedList(List):
         self.count = 0
     # Returns an iterator of the elements in the list (in proper sequence).
     
-    def iterator(self):
-        node = self.head
-        it = sll_iterator.Sll_Iterator(node)
+    def iterator(self, reset = False):
+        if self.iterated_node == None:
+            self.iterated_node = self.head
+        it=sll_iterator.Iterator(self.iterated_node, self.head)
+        if reset == False:
+            self.iterated_node=self.iterated_node.get_next()
+        else:
+            self.iterated_node = self.head
         return it
