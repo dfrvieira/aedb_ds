@@ -1,7 +1,7 @@
 from .tad_list import List
 from ..exceptions import EmptyListException, InvalidPositionException, NoSuchElementException
 from .nodes import SingleListNode
-import sll_iterator
+from .singly_linked_linked_iterator import SinglyLinkedListIterator
 
 class SinglyLinkedList(List):
     def __init__(self):
@@ -41,15 +41,16 @@ class SinglyLinkedList(List):
     
     def get(self, position):
         if self.size()!=0:
-            if -1 < position <=self.size():
-                current_node = self.head
-                for _ in range(position):
-                    current_node = current_node.get_next()
-                return current_node.get_element()
-            else:
-                raise InvalidPositionException()
-        else:
             raise EmptyListException()
+        
+        if -1 < position <=self.size():
+            raise InvalidPositionException()
+        
+        current_node = self.head
+        for _ in range(position):
+            current_node = current_node.get_next()
+        return current_node.get_element()
+        
 
 
     # Returns the position in the list of the
@@ -173,11 +174,12 @@ class SinglyLinkedList(List):
     # Returns an iterator of the elements in the list (in proper sequence).
     
     def iterator(self, reset = False):
-        if self.iterated_node == None:
-            self.iterated_node = self.head
-        it = sll_iterator.Iterator(self.iterated_node, self.head)
-        if reset == False:
-            self.iterated_node=self.iterated_node.get_next()
-        else:
-            self.iterated_node = self.head
-        return it
+        return SinglyLinkedListIterator(self)
+        #if self.iterated_node == None:
+        #    self.iterated_node = self.head
+        #it = sll_iterator.Iterator(self.iterated_node, self.head)
+        #if reset == False:
+        #    self.iterated_node=self.iterated_node.get_next()
+        #else:
+        #    self.iterated_node = self.head
+        #return it

@@ -1,10 +1,9 @@
-import exceptions
+from .tad_iterator import Iterator
 
-class Iterator():
-    def __init__(self, target, first):
-        self.target = target
-        self.first = first
-
+class SinglyLinkedListIterator(Iterator):
+    def __init__(self, sll):
+        self.list = sll
+    
     def has_next(self):
         if self.target != None:
             return True

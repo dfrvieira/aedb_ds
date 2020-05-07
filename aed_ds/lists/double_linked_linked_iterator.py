@@ -1,4 +1,4 @@
-from sll_iterator import Iterator
+from .singly_linked_linked_iterator import Iterator
 
 
 class TwoWayIterator(Iterator):

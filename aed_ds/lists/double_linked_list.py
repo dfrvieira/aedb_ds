@@ -1,7 +1,7 @@
-from singly_linked_list import SinglyLinkedList
-from nodes import DoubleListNode
-import exceptions
-import dll_iterator
+from .singly_linked_list import SinglyLinkedList
+from .nodes import DoubleListNode
+from ..exceptions import EmptyListException, InvalidPositionException, NoSuchElementException
+from . import double_linked_linked_iterator
 
 class DoubleLinkedList(SinglyLinkedList):
 
@@ -98,7 +98,7 @@ class DoubleLinkedList(SinglyLinkedList):
                 
     def remove_first(self):
         if self.size() == 0:
-            exceptions.EmptyListException()
+            raise EmptyListException()
         else:
             previous_first = self.head
             self.head = previous_first.get_next()
@@ -108,7 +108,7 @@ class DoubleLinkedList(SinglyLinkedList):
 
     def remove_last(self):
         if self.size() == 0:
-            exceptions.EmptyListException()
+            raise EmptyListException()
         else:
             previous_tail = self.tail
             self.tail = previous_tail.get_previous()
@@ -117,7 +117,7 @@ class DoubleLinkedList(SinglyLinkedList):
 
     def remove(self, position):
         if position < 0 or position >= self.size():
-            exceptions.InvalidPositionException()
+            raise InvalidPositionException()
 
         elif position == 0:
             self.remove_first()
@@ -156,12 +156,12 @@ class DoubleLinkedList(SinglyLinkedList):
         if reverse == False:
             if self.iterated_node == None:
                 self.iterated_node = self.head
-            it = dll_iterator.TwoWayIterator(self.iterated_node, self.head, self.tail)
+            it = double_linked_linked_iterator.TwoWayIterator(self.iterated_node, self.head, self.tail)
             self.iterated_node = self.iterated_node.get_next()
         else:
             if self.iterated_node == None:
                 self.iterated_node = self.tail
-            it = dll_iterator.TwoWayIterator(self.iterated_node, self.head, self.tail)
+            it = double_linked_linked_iterator.TwoWayIterator(self.iterated_node, self.head, self.tail)
             self.iterated_node = self.iterated_node.get_previous()
         return it
 
