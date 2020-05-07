@@ -12,7 +12,7 @@ class TestSinglyLinkedList(unittest.TestCase):
             self.list.insert_last(f"element {i+1}")
     
     def remove_elements(self, quantity):
-        for i in range(quantity):
+        for _ in range(quantity):
             self.list.remove_last()
 
     def test_is_empty(self):
