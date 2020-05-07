@@ -21,7 +21,7 @@ class DoubleListNode(SingleListNode):
         self.previous = previous
     
     def get_previous(self):
-        return self.previous
+        return self.previous_node
     
-    def set_previous(self, previous):
-        self.previous = previous
+    def set_previous(self, previous_node):
+        self.previous_node = previous_node
