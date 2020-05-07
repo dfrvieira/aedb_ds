@@ -41,15 +41,15 @@ class SinglyLinkedList(List):
     
     def get(self, position):
         if self.size()!=0:
-            raise EmptyListException()
-        
-        if -1 < position <=self.size():
-            raise InvalidPositionException()
-        
-        current_node = self.head
-        for _ in range(position):
-            current_node = current_node.get_next()
-        return current_node.get_element()
+            if -1 < position <=self.size():
+                current_node = self.head
+                for _ in range(position):
+                    current_node = current_node.get_next()
+                return current_node.get_element()
+            else:
+                raise InvalidPositionException()
+        else:
+            raise EmptyListException
         
 
 

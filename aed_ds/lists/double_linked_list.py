@@ -1,6 +1,6 @@
 from .singly_linked_list import SinglyLinkedList
 from .nodes import DoubleListNode
-from ..exceptions import EmptyListException, InvalidPositionException, NoSuchElementException
+from .. import exceptions
 from . import double_linked_linked_iterator
 
 class DoubleLinkedList(SinglyLinkedList):
@@ -98,7 +98,7 @@ class DoubleLinkedList(SinglyLinkedList):
                 
     def remove_first(self):
         if self.size() == 0:
-            raise EmptyListException()
+            exceptions.EmptyListException()
         else:
             previous_first = self.head
             self.head = previous_first.get_next()
@@ -108,7 +108,7 @@ class DoubleLinkedList(SinglyLinkedList):
 
     def remove_last(self):
         if self.size() == 0:
-            raise EmptyListException()
+            exceptions.EmptyListException()
         else:
             previous_tail = self.tail
             self.tail = previous_tail.get_previous()
@@ -117,7 +117,7 @@ class DoubleLinkedList(SinglyLinkedList):
 
     def remove(self, position):
         if position < 0 or position >= self.size():
-            raise InvalidPositionException()
+            exceptions.InvalidPositionException()
 
         elif position == 0:
             self.remove_first()
