@@ -1,6 +1,6 @@
 import exceptions
 
-class sll_Iterator():
+class Iterator():
     def __init__(self, target, first):
         self.target = target
         self.first = first

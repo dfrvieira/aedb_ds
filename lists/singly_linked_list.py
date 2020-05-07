@@ -1,5 +1,5 @@
 from tad_list import List
-from exceptions import *
+from exceptions import EmptyListException, InvalidPositionException
 from nodes import SingleListNode
 import sll_iterator
 
@@ -7,7 +7,7 @@ class SinglyLinkedList(List):
     def __init__(self):
         self.head = None
         self.tail = None
-        self.interated_node = None
+        self.iterated_node = None
         self.count = 0
     # Returns true iff the list contains no elements.
     def is_empty(self):

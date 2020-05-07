@@ -77,7 +77,7 @@ class DoubleLinkedList(SinglyLinkedList):
         if position == 0:
             self.insert_first(element)
         elif self.size()-1 == position:
-            self.insert_last()
+            self.insert_last(element)
         else:
             if self.is_over_half(position):
                 current_node = self.tail
