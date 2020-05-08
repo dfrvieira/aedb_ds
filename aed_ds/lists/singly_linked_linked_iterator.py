@@ -11,9 +11,9 @@ class SinglyLinkedListIterator(Iterator):
         return False
 
     def next(self):
-            elem = self.target.get_element()
-            self.target = self.target.get_next()
-            return elem
+        elem = self.target.get_element()
+        self.target = self.target.get_next()
+        return elem
 
     def rewind(self):
         self.target = self.first
