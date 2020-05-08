@@ -172,8 +172,8 @@ class SinglyLinkedList(List):
         self.count = 0
     # Returns an iterator of the elements in the list (in proper sequence).
     
-    def iterator(self, reset = False):
-        return SinglyLinkedListIterator(self)
+    def iterator(self):
+        return SinglyLinkedListIterator(self.head)
         #if self.iterated_node == None:
         #    self.iterated_node = self.head
         #it = sll_iterator.Iterator(self.iterated_node, self.head)
