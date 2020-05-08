@@ -91,5 +91,19 @@ class TestSinglyLinkedList(unittest.TestCase):
             self.list.remove(6)
         self.assertEqual(self.list.remove(0), "element 1")
 
-    def test_make_empty(self):pass
-    def test_iterator(self):pass
+    def test_make_empty(self):
+        self.add_elements(5)
+        self.list.make_empty()
+        self.assertEqual(self.list.size(), 0)
+        with self.assertRaises(EmptyListException):
+            self.list.get_first()
+        with self.assertRaises(EmptyListException):
+            self.list.get_last()
+    
+    def test_iterator(self):
+        self.add_elements(3)
+        compare = []
+        it = self.list.iterator()
+        while it.has_next():
+            compare.append(it.next())
+        self.assertEqual(compare,['element 1','element 2','element 3'])

@@ -22,34 +22,33 @@ class SinglyLinkedList(List):
     # Throws EmptyListException.
     
     def get_first(self):
-        try:
-            return self.head.get_element()
-        except:
+        if self.size() == 0:
             raise EmptyListException()
+        return self.head.get_element()
 
     # Returns the last element of the list.
     # Throws EmptyListException.
     
     def get_last(self):
-        try:
-            return self.tail.get_element()
-        except:
+        if self.size() == 0:
             raise EmptyListException()
+        return self.tail.get_element()
 
     # Returns the element at the specified position in the list.
     # Range of valid positions: 0, ..., size()-1.
     
     def get(self, position):
-        if self.size()!=0:
-            if -1 < position <=self.size():
-                current_node = self.head
-                for _ in range(position):
-                    current_node = current_node.get_next()
-                return current_node.get_element()
-            else:
-                raise InvalidPositionException()
+        if self.size()==0:
+            raise EmptyListException()
+
+        elif 0 > position or position >= self.size():
+            raise InvalidPositionException()
+
         else:
-            raise EmptyListException
+            current_node = self.head
+            for _ in range(position):
+                current_node = current_node.get_next()
+            return current_node.get_element()
         
 
 
@@ -59,16 +58,16 @@ class SinglyLinkedList(List):
     # occur in the list.
     
     def find(self, element):
-        if self.size() != 0:
-            node = self.head
-            position = 0
-            while position <= self.size():
-                if node.get_element() == element:
-                    return position
-                node = node.get_next()
-                position += 1
+        node = self.head
+        position = 0
+        while position <= self.size() -1:
+            if node.get_element() == element:
+                return position
+            node = node.get_next()
+            position += 1
 
-            return -1
+        return -1
+
 
     # Inserts the specified element at the first position in the list.
     
@@ -147,23 +146,23 @@ class SinglyLinkedList(List):
     # Throws InvalidPositionException.
     
     def remove(self, position):
-        try:
-            current = self.head
-            if position == 0:
-                self.remove_first()
-            elif position == self.size():
-                self.remove_last()
-            else:
-                previous = None
-                count = 1
-                while count != position:
-                    previous = current
-                    current = current.get_next()
-                    count +=1
-                previous.set_next(current.get_next())
-                self.count-=1
-        except:
+        if position < 0 or position > self.size() -1:
             raise InvalidPositionException()
+        current = self.head
+        if position == 0:
+            return self.remove_first()
+        elif position == self.size():
+            return self.remove_last()
+        else:
+            previous = None
+            count = 1
+            while count != position:
+                previous = current
+                current = current.get_next()
+                count +=1
+            previous.set_next(current.get_next())
+            self.count-=1
+            return current.get_element()
     
     # Removes all elements from the list.
     

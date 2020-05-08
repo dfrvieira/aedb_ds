@@ -1,8 +1,9 @@
 from .tad_iterator import Iterator
 
 class SinglyLinkedListIterator(Iterator):
-    def __init__(self, sll):
-        self.list = sll
+    def __init__(self, target):
+        self.target = target
+        self.first = target
     
     def has_next(self):
         if self.target != None:
@@ -10,7 +11,6 @@ class SinglyLinkedListIterator(Iterator):
         return False
 
     def next(self):
-        if self.has_next():
             elem = self.target.get_element()
             self.target = self.target.get_next()
             return elem
