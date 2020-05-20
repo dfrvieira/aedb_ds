@@ -194,13 +194,14 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.assertTrue(self.list.is_empty())
 
       def test_make_empty(self):
-        self.add_elements(5)
-        self.list.make_empty()
-        self.assertEqual(self.list.size(), 0)
-        with self.assertRaises(EmptyListException):
-            self.list.get_first()
-        with self.assertRaises(EmptyListException):
-            self.list.get_last()
+          self.add_elements(5)
+          self.list.make_empty()
+          self.assertEqual(self.list.size(), 0)
+          with self.assertRaises(EmptyListException):
+              self.list.get_first()
+          with self.assertRaises(EmptyListException):
+              self.list.get_last()
+          
     
     def test_iterator(self):
         self.add_elements(3)
