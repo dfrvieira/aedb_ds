@@ -98,22 +98,18 @@ class SinglyLinkedList(List):
     # Throws InvalidPositionException.
     
     def insert(self, element, position):
-        if self.size()==0:
-            raise EmptyListException()
+        if 0 > position or position > self.size():
+            raise InvalidPositionException()
+        if position == 0:
+            self.insert_first(element)
+        elif position == self.size() - 1:
+            self.insert_last(element)
         else:
-            if -1 < position <=self.size():
-                if position==0:
-                    self.insert_first(element)
-                elif position == self.size()-1:
-                    self.insert_last(element)
-                else:
-                    current_node=self.head
-                    for i in range(position-1):
-                        current_node=current_node.get_next()
-                        
-                    new_node= SingleListNode(element,current_node.get_next())
-                    current_node.set_next(new_node)
-                    self.count+=1
+            current_node = self.head
+            for _ in range(position - 1):
+                current_node = current_node.get_next()
+            new_node = SingleListNode(element, current_node.get_next())
+            current_node.set_next(new_node)
 
     # Removes and returns the element at the first position in the list.
     # Throws EmptyListException.
@@ -121,48 +117,53 @@ class SinglyLinkedList(List):
     def remove_first(self):
         if self.size() == 0:
             raise EmptyListException()
-        else:
-            previous_first = self.head
-            self.head = previous_first.get_next()
+        if self.count != 0:
+            first_node = self.head
+            self.head = self.head.get_next()
+            first_node.set_next(None)
             self.count -= 1
-            return previous_first.get_element()
-
+            return first_node.get_element()
     # Removes and returns the element at the last position in the list.
     # Throws EmptyListException.
     
     def remove_last(self):
-        try:
-            current = self.head
-            for _ in range(0,self.size()-2):
-                current = current.get_next()
-            current.set_next(None)
-            self.tail = current
-            self.count-=1
-        except:
+        if self.size() == 0:
             raise EmptyListException()
+        if self.count != 0:
+            last_node = self.tail
+            current_node = self.head
+            for _ in range(0, self.count - 2):
+                current_node = current_node.get_next()
+            current_node.set_next(None)
+            self.tail = current_node
+            self.count -= 1
+            return last_node.get_element()
     
     # Removes and returns the element at the specified position in the list.
     # Range of valid positions: 0, ..., size()-1.
     # Throws InvalidPositionException.
     
     def remove(self, position):
-        if position < 0 or position > self.size() -1:
+        if self.size() == 0:
             raise InvalidPositionException()
-        current = self.head
-        if position == 0:
-            return self.remove_first()
-        elif position == self.size():
-            return self.remove_last()
-        else:
-            previous = None
-            count = 1
-            while count != position:
-                previous = current
-                current = current.get_next()
-                count +=1
-            previous.set_next(current.get_next())
-            self.count-=1
-            return current.get_element()
+        if self.count != 0:
+            if position == 0:
+                return self.remove_first()
+            elif position == self.count - 1:
+                return self.remove_last()
+            elif position in range (1, self.count - 1):
+                selected_node = self.head
+                selected_node = selected_node.get_next()
+                current_node = self.head
+                for _ in range(0, position - 1):
+                    selected_node = selected_node.get_next()
+                    current_node = current_node.get_next()
+                current_node.set_next(selected_node.get_next())
+                selected_node.set_next(None)
+                self.count -= 1
+                return selected_node.get_element()
+            else:
+                raise InvalidPositionException()
     
     # Removes all elements from the list.
     
