@@ -3,7 +3,7 @@ import unittest
 from aed_ds.exceptions import EmptyListException, InvalidPositionException
 from aed_ds.lists.singly_linked_list import SinglyLinkedList
 from aed_ds.lists.singly_linked_list_iterator import SinglyLinkedListIterator
-from aed_ds.lists.tad_iterator import Iterator
+from aed_ds.tad_iterator import Iterator
 
 class TestSinglyLinkedList(unittest.TestCase):
     def setUp(self):

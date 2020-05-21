@@ -12,7 +12,6 @@ class TestDoublyLinkedList(unittest.TestCase):
     def add_elements(self, quantity, shift=0):
         for i in range(quantity):
             self.list.insert_last(f"element {i+1+shift}")
-
     def remove_elements(self, quantity):
         for _ in range(quantity):
             self.list.remove_last()
@@ -96,7 +95,6 @@ class TestDoublyLinkedList(unittest.TestCase):
         self.add_elements(5)
         self.list.remove_first()
         self.assertEqual(self.list.get_first(), "element 2")
-
     def test_remove_first_single_element(self):
         self.list.make_empty()
         self.add_elements(1)
@@ -170,7 +168,6 @@ class TestDoublyLinkedList(unittest.TestCase):
         self.list.make_empty()
         self.add_elements(1)
         self.assertEqual(self.list.remove(0), "element 1")
-
         with self.assertRaises(InvalidPositionException):
             self.list.remove(0)
 

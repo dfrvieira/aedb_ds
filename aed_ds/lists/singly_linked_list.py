@@ -111,6 +111,7 @@ class SinglyLinkedList(List):
             new_node = SingleListNode(element, current_node.get_next())
             current_node.set_next(new_node)
 
+            self.count += 1
     # Removes and returns the element at the first position in the list.
     # Throws EmptyListException.
     

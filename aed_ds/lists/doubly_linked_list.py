@@ -14,22 +14,22 @@ class DoublyLinkedList(SinglyLinkedList):
     def get(self, position):
         if self.size() == 0:
             raise EmptyListException()
-
         if position <= int(self.count/2):
-            SinglyLinkedList.get(self, position)
+            return SinglyLinkedList.get(self, position)
         elif position > int(self.count/2):
             current_node = self.tail
-            for _ in range(self.count - 1, position - 1, -1):
+            for _ in range(self.count - 1, position, -1):
                 current_node = current_node.get_previous()
             return current_node.get_element()
 
     # Inserts the specified element at the first position in the list.
     def insert_first(self, element):
         new_node = DoubleListNode(element, self.head, None)
+        if self.count == 0:
+            self.head = new_node
+            self.tail = new_node
         self.head.set_previous(new_node)
         self.head = new_node
-        if self.count == 0:
-            self.tail = new_node
         self.count += 1
 
     # Inserts the specified element at the last position in the list.
@@ -37,8 +37,10 @@ class DoublyLinkedList(SinglyLinkedList):
         new_node = DoubleListNode(element, None, self.tail)
         if self.count == 0:
             self.head = new_node
-        self.tail.set_next(new_node)    
-        self.tail = new_node
+            self.tail = new_node
+        else:    
+            self.tail.set_next(new_node)    
+            self.tail = new_node
         self.count += 1
 
     # Inserts the specified element at the specified position in the list.
@@ -47,11 +49,8 @@ class DoublyLinkedList(SinglyLinkedList):
     # If the specified position is size(), insert corresponds to insertLast.
     # Throws InvalidPositionException.
     def insert(self, element, position):
-        if position not in range(0, self.count):
+        if position not in range(0, self.count+1):
             raise InvalidPositionException()
-
-        if not self.count == None:
-            raise EmptyListException() 
 
         if position == 0:
             self.insert_first(element)
@@ -87,10 +86,12 @@ class DoublyLinkedList(SinglyLinkedList):
     def remove_first(self):
         if self.size() == 0:
             raise EmptyListException()
-
         first_node = self.head
         self.head = self.head.get_next()
         first_node.set_next(None)
+        if self.count == 1:
+            self.count -= 1
+            return first_node.get_element()
         self.head.set_previous(None)
         self.count -= 1
         return first_node.get_element()  
@@ -101,10 +102,12 @@ class DoublyLinkedList(SinglyLinkedList):
     def remove_last(self):
         if self.size() == 0:
             raise EmptyListException()    
-
         last_node = self.tail
         self.tail = self.tail.get_previous()
         last_node.set_previous(None)
+        if self.count == 1:
+            self.count -= 1
+            return last_node.get_element()
         self.tail.set_next(None)
         self.count -= 1
         return last_node.get_element()
@@ -113,10 +116,12 @@ class DoublyLinkedList(SinglyLinkedList):
     # Range of valid positions: 0, ..., size()-1.
     # Throws InvalidPositionException.
     def remove(self, position):
-        if self.size() == 0:
+        if position not in range(0, self.count):
             raise InvalidPositionException()
         elif self.count == 1:
+            new_node = self.head
             self.make_empty()
+            return new_node.get_element()
         elif self.count != 0:
             if position == 0:
                 return self.remove_first()
@@ -139,11 +144,11 @@ class DoublyLinkedList(SinglyLinkedList):
                 selected_node = self.tail
                 selected_node = selected_node.get_previous()
                 current_node = self.tail
-                for _ in range(self.count - 1, position - 1, -1):
+                for _ in range(self.count - 1, position, -1):
                     selected_node = selected_node.get_previous()
                     current_node = current_node.get_previous()
                 current_node.set_previous(selected_node.get_previous())
-                selected_node.get_preivous().set_next(current_node)    
+                selected_node.get_previous().set_next(current_node)    
                 selected_node.set_next(None)
                 selected_node.set_previous(None)
                 self.count -= 1

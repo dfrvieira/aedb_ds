@@ -1,4 +1,4 @@
-from .tad_iterator import Iterator
+from ..tad_iterator import Iterator
 from ..exceptions import NoSuchElementException  
 
 class SinglyLinkedListIterator(Iterator):
