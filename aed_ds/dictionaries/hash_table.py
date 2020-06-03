@@ -74,10 +74,6 @@ class HashTable(Dictionary):
                 self.num_elements -= 1  # Update number of elements
                 
 
-        
-        
-        
-
     def keys(self):
         result = SinglyLinkedList()
         for index in self.table:
