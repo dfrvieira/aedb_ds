@@ -5,6 +5,7 @@ from aed_ds.lists.singly_linked_list import SinglyLinkedList
 from aed_ds.lists.singly_linked_list_iterator import SinglyLinkedListIterator
 from aed_ds.tad_iterator import Iterator
 
+
 class TestSinglyLinkedList(unittest.TestCase):
     def setUp(self):
         self.list = SinglyLinkedList()
@@ -92,7 +93,6 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.assertEqual(self.list.get_first(), "element 2")
     
     def test_remove_first_single_element(self):
-        self.list.make_empty()
         self.add_elements(1)
         self.assertEqual(self.list.remove_first(), "element 1")
 
@@ -123,6 +123,10 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.add_elements(5)
         self.list.remove_last()
         self.assertEqual(self.list.get_last(), "element 4")
+    
+    def test_remove_last_two_elements(self):
+        self.add_elements(2)
+        self.assertEqual(self.list.remove_last(), "element 2")
 
     def test_remove_last_single_element(self):
         self.list.make_empty()
@@ -204,9 +208,8 @@ class TestSinglyLinkedList(unittest.TestCase):
           
     
     def test_iterator(self):
-        self.add_elements(3)
-        compare = []
-        it = self.list.iterator()
-        while it.has_next():
-            compare.append(it.next())
-        self.assertEqual(compare,['element 1','element 2','element 3'])
+        self.assertIsInstance(self.list.iterator(), Iterator)
+        self.assertIsInstance(self.list.iterator(), SinglyLinkedListIterator)
+
+if __name__ == "__main__":
+    unittest.main()

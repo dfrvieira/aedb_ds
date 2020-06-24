@@ -2,7 +2,7 @@ from ..exceptions import NoSuchElementException, DuplicatedKeyException
 from ..lists.singly_linked_list import SinglyLinkedList
 from .item import Item 
 
-import ctypes
+import ctypes 
 
 class HashTable(Dictionary):
     
@@ -21,15 +21,10 @@ class HashTable(Dictionary):
     def is_full(self):
         return self.num_elements == self.array_size
 
-    def get(self, k):
-        if not self.has_key(k):
-            raise NoSuchElementException()
-        else:
-            idx = self.table[self.hashfunction(k)]
-            for _ in range(self.size()):
-                node = idx.iterator().next()
-                if node.get_element().get_key() == k:
-                    return node.get_element().get_value()
+    def insert(self, k, v):
+        # Check if it has key
+        if self.has_key(k):
+            raise DuplicatedKeyException()
 
     def insert(self, k, v):
         # Check if it has key
@@ -44,7 +39,7 @@ class HashTable(Dictionary):
         # Insert the item in the colision list
         self.table[idx].insert_last(item)
         # Update the number of elements
-        self.num_elements += 1
+        self.num_elements += 1    
 
     def update(self, k, v):
         if not self.has_key(k):
@@ -94,6 +89,11 @@ class HashTable(Dictionary):
             while index.iterator().has_next():
                 result.insert_last(index.iterator().next())
         return result
+
+    def hash_function(self, k):
+        return sum([ord(c) for c in k]) % self.array_size
+
+    def items(self): pass
 
     def hash_function(self, k):
         return sum([ord(c) for c in k]) % self.array_size
